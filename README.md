@@ -1,4 +1,4 @@
-# Hi, I'm James Ebbah-Idala 👋
+# Hi, I'm James Ebbah-Idala
 
 Cybersecurity enthusiast focused on:
 - SOC Operations
