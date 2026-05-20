@@ -7,7 +7,8 @@ Cybersecurity enthusiast focused on:
 - Threat Detection
 
 ## Certifications
-- Security+
+- CompTia Security+
+- HTB CPTS(In Progress)
 
 ## Current Projects
 - SOC Home Lab (Wazuh + Sysmon)
@@ -18,7 +19,7 @@ Cybersecurity enthusiast focused on:
 ## Skills
 - SIEM: Wazuh, Splunk, Elastic
 - Networking: TCP/IP, DNS, HTTP
-- Tools: Wireshark, Nmap, Burp Suite
+- Tools: Wireshark, Nmap, Burp Suite, Metasploit
 - OS: Linux, Windows
 - Scripting: Python, Bash
 
