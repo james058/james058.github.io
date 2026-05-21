@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>James Ebbah-Idala | Cybersecurity Portfolio</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#0a0a0a;
+      color:#e5e5e5;
+      font-family:Arial, Helvetica, sans-serif;
+      line-height:1.7;
+      padding:40px 24px;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      padding:80px 0 60px;
+      border-bottom:1px solid #1f1f1f;
+      margin-bottom:50px;
+    }
+
+    .hero h1{
+      font-size:4rem;
+      color:#ffffff;
+      margin-bottom:18px;
+      letter-spacing:-2px;
+    }
+
+    .hero p{
+      max-width:750px;
+      color:#b5b5b5;
+      font-size:1.15rem;
+    }
+
+    .hero-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+
+    .tag{
+      background:#141414;
+      border:1px solid #262626;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:0.9rem;
+      color:#d4d4d4;
+    }
+
+    /* =========================
+       SECTION TITLES
+    ========================= */
+
+    .section-title{
+      font-size:2rem;
+      margin-bottom:28px;
+      color:#ffffff;
+      border-left:4px solid #444;
+      padding-left:14px;
+    }
+
+    section{
+      margin-bottom:70px;
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+      gap:24px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card{
+      background:#111111;
+      border:1px solid #1f1f1f;
+      border-radius:18px;
+      padding:28px;
+      transition:0.25s ease;
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:#3a3a3a;
+    }
+
+    .card h3{
+      color:#ffffff;
+      margin-bottom:14px;
+      font-size:1.35rem;
+    }
+
+    .card p{
+      color:#b8b8b8;
+      margin-bottom:22px;
+    }
+
+    .card-button{
+      display:inline-block;
+      background:#1c1c1c;
+      border:1px solid #333;
+      color:#ffffff;
+      padding:12px 18px;
+      border-radius:10px;
+      transition:0.2s ease;
+      font-size:0.95rem;
+    }
+
+    .card-button:hover{
+      background:#262626;
+      border-color:#555;
+    }
+
+    /* =========================
+       QUICK LINKS
+    ========================= */
+
+    .quick-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-top:24px;
+    }
+
+    .quick-link{
+      background:#111111;
+      border:1px solid #222;
+      padding:14px 18px;
+      border-radius:12px;
+      transition:0.2s ease;
+    }
+
+    .quick-link:hover{
+      background:#1a1a1a;
+      border-color:#444;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer{
+      margin-top:80px;
+      padding-top:30px;
+      border-top:1px solid #1f1f1f;
+      color:#777;
+      text-align:center;
+      font-size:0.95rem;
+    }
+
+    /* =========================
+       SCROLLBAR
+    ========================= */
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:#0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#2d2d2d;
+      border-radius:10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover{
+      background:#444;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:768px){
+
+      body{
+        padding:24px 18px;
+      }
+
+      .hero h1{
+        font-size:2.7rem;
+      }
+
+      .section-title{
+        font-size:1.6rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <h1>James Ebbah-Idala</h1>
+
+    <p>
+      Cybersecurity portfolio focused on penetration testing,
+      offensive security, detection engineering, and security research.
+      Documenting labs, projects, and writeups while developing practical
+      experience in red teaming and SOC operations.
+    </p>
+
+    <div class="hero-tags">
+      <span class="tag">Security+</span>
+      <span class="tag">HTB CPTS Path</span>
+      <span class="tag">Python</span>
+      <span class="tag">Splunk</span>
+      <span class="tag">Wazuh</span>
+      <span class="tag">Active Directory</span>
+      <span class="tag">Linux</span>
+      <span class="tag">Web Exploitation</span>
+    </div>
+
+  </section>
+
+  <!-- MAIN SECTIONS -->
+
+  <section>
+
+    <h2 class="section-title">Portfolio Sections</h2>
+
+    <div class="grid">
+
+      <!-- PROJECTS -->
+
+      <div class="card">
+
+        <h3>Projects</h3>
+
+        <p>
+          Security-related development projects including web applications,
+          tooling, automation, and defensive security labs.
+        </p>
+
+        <a class="card-button" href="./projects/index.html">
+          View Projects
+        </a>
+
+      </div>
+
+      <!-- WRITEUPS -->
+
+      <div class="card">
+
+        <h3>Writeups</h3>
+
+        <p>
+          Hack The Box and TryHackMe writeups focused on methodology,
+          exploitation, privilege escalation, and post-exploitation analysis.
+        </p>
+
+        <a class="card-button" href="./writeups/index.html">
+          View Writeups
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- QUICK LINKS -->
+
+  <section>
+
+    <h2 class="section-title">Quick Links</h2>
+
+    <div class="quick-links">
+
+      <a class="quick-link"
+         href="https://github.com/james058">
+        GitHub
+      </a>
+
+      <a class="quick-link"
+         href="https://www.hackthebox.com">
+        Hack The Box
+      </a>
+
+      <a class="quick-link"
+         href="https://tryhackme.com">
+        TryHackMe
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 James Ebbah-Idala — Cybersecurity Portfolio
+  </footer>
+
+</body>
+</html>
