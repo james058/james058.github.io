@@ -146,6 +146,51 @@
     }
 
     /* =========================
+       CERTIFICATIONS
+    ========================= */
+
+    .certifications{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:20px;
+    }
+
+    .cert-card{
+      background:#111111;
+      border:1px solid #1f1f1f;
+      border-radius:16px;
+      padding:24px;
+      transition:0.25s ease;
+    }
+
+    .cert-card:hover{
+      border-color:#3a3a3a;
+      transform:translateY(-3px);
+    }
+
+    .cert-title{
+      font-size:1.2rem;
+      color:#ffffff;
+      margin-bottom:10px;
+    }
+
+    .cert-status{
+      display:inline-block;
+      margin-top:10px;
+      background:#1a1a1a;
+      border:1px solid #333;
+      color:#d4d4d4;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:0.85rem;
+    }
+
+    .cert-description{
+      color:#b5b5b5;
+      font-size:0.97rem;
+    }
+
+    /* =========================
        QUICK LINKS
     ========================= */
 
@@ -242,14 +287,56 @@
     </p>
 
     <div class="hero-tags">
-      <span class="tag">Security+</span>
-      <span class="tag">HTB CPTS Path</span>
       <span class="tag">Python</span>
       <span class="tag">Splunk</span>
       <span class="tag">Wazuh</span>
       <span class="tag">Active Directory</span>
       <span class="tag">Linux</span>
       <span class="tag">Web Exploitation</span>
+    </div>
+
+  </section>
+
+  <!-- CERTIFICATIONS -->
+
+  <section>
+
+    <h2 class="section-title">Certifications</h2>
+
+    <div class="certifications">
+
+      <div class="cert-card">
+
+        <h3 class="cert-title">CompTIA Security+</h3>
+
+        <p class="cert-description">
+          Industry-recognized cybersecurity certification covering
+          networking, threat detection, incident response,
+          risk management, and security fundamentals.
+        </p>
+
+        <span class="cert-status">
+          Certified
+        </span>
+
+      </div>
+
+      <div class="cert-card">
+
+        <h3 class="cert-title">HTB Certified Penetration Testing Specialist (CPTS)</h3>
+
+        <p class="cert-description">
+          Hands-on penetration testing certification path focused on
+          web exploitation, Active Directory attacks, privilege escalation,
+          enumeration, pivoting, and red team methodology.
+        </p>
+
+        <span class="cert-status">
+          In Progress
+        </span>
+
+      </div>
+
     </div>
 
   </section>
