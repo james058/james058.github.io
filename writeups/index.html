@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Writeups | James Ebbah-Idala</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#0a0a0a;
+      color:#e5e5e5;
+      font-family:Arial, Helvetica, sans-serif;
+      line-height:1.7;
+      padding:40px 24px;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header{
+      padding:60px 0 40px;
+      border-bottom:1px solid #1f1f1f;
+      margin-bottom:50px;
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-bottom:24px;
+      color:#9ca3af;
+      transition:0.2s ease;
+    }
+
+    .back-link:hover{
+      color:#ffffff;
+    }
+
+    .header h1{
+      font-size:3.2rem;
+      color:#ffffff;
+      margin-bottom:16px;
+      letter-spacing:-1px;
+    }
+
+    .header p{
+      max-width:800px;
+      color:#b5b5b5;
+      font-size:1.05rem;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    section{
+      margin-bottom:70px;
+    }
+
+    .section-title{
+      font-size:2rem;
+      color:#ffffff;
+      margin-bottom:26px;
+      border-left:4px solid #444;
+      padding-left:14px;
+    }
+
+    /* =========================
+       WRITEUP GRID
+    ========================= */
+
+    .writeup-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+      gap:24px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card{
+      background:#111111;
+      border:1px solid #1f1f1f;
+      border-radius:18px;
+      padding:28px;
+      transition:0.25s ease;
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:#3a3a3a;
+    }
+
+    .card h3{
+      color:#ffffff;
+      margin-bottom:12px;
+      font-size:1.3rem;
+    }
+
+    .card p{
+      color:#b5b5b5;
+      margin-bottom:22px;
+      font-size:0.96rem;
+    }
+
+    .writeup-links{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .writeup-link{
+      background:#181818;
+      border:1px solid #262626;
+      padding:14px 16px;
+      border-radius:10px;
+      transition:0.2s ease;
+      color:#e5e5e5;
+    }
+
+    .writeup-link:hover{
+      background:#222222;
+      border-color:#444;
+      transform:translateX(4px);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer{
+      margin-top:80px;
+      padding-top:30px;
+      border-top:1px solid #1f1f1f;
+      color:#777;
+      text-align:center;
+      font-size:0.95rem;
+    }
+
+    /* =========================
+       SCROLLBAR
+    ========================= */
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:#0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#2d2d2d;
+      border-radius:10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover{
+      background:#444;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:768px){
+
+      body{
+        padding:24px 18px;
+      }
+
+      .header h1{
+        font-size:2.4rem;
+      }
+
+      .section-title{
+        font-size:1.6rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <a class="back-link" href="../index.html">
+      ← Back to Home
+    </a>
+
+    <h1>Writeups</h1>
+
+    <p>
+      Collection of Hack The Box and TryHackMe writeups documenting
+      enumeration, exploitation, privilege escalation, methodology,
+      and post-exploitation techniques used during machine compromise.
+    </p>
+
+  </header>
+
+  <!-- HTB SECTION -->
+
+  <section>
+
+    <h2 class="section-title">Hack The Box</h2>
+
+    <div class="writeup-grid">
+
+      <div class="card">
+
+        <h3>HTB Writeups</h3>
+
+        <p>
+          Writeups focused on Linux, Windows, Active Directory,
+          web exploitation, container escapes, and privilege escalation.
+        </p>
+
+        <div class="writeup-links">
+
+          <a class="writeup-link"
+             href="../htb/MonitorsFour.html">
+            MonitorsFour
+          </a>
+
+        </div>
+        <p>
+            More writeups coming soon. I have them drafted, just have to publish them
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- THM SECTION -->
+
+  <section>
+
+    <h2 class="section-title">TryHackMe</h2>
+
+    <div class="writeup-grid">
+
+      <div class="card">
+
+        <h3>THM Writeups</h3>
+
+        <p>
+          Writeups covering beginner to intermediate labs focused on
+          enumeration, privilege escalation, networking,
+          and defensive security concepts.
+        </p>
+
+        <div class="writeup-links">
+
+
+        </div>
+        <p>
+          More writeups coming soon. I have them drafted, just have to publish them
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 James Ebbah-Idala — Cybersecurity Portfolio
+  </footer>
+
+</body>
+</html>
