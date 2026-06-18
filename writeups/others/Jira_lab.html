@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<title>Jira Service Management (JSM) – Practical Infrastructure Management</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
+
+<style>
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#0a0a0a;
+    color:#e5e5e5;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.8;
+    max-width:1100px;
+    margin:auto;
+    padding:40px 28px;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title{
+    font-size:3rem;
+    font-weight:700;
+    color:#ffffff;
+    margin-bottom:20px;
+    border-bottom:2px solid #1f1f1f;
+    padding-bottom:20px;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1,h2,h3,h4{
+    color:#ffffff;
+    margin-top:45px;
+    margin-bottom:18px;
+    line-height:1.3;
+}
+
+h2{
+    font-size:1.9rem;
+    border-left:4px solid #444;
+    padding-left:14px;
+}
+
+h3{
+    font-size:1.4rem;
+    color:#d4d4d4;
+}
+
+h4{
+    font-size:1.15rem;
+    color:#c0c0c0;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+p{
+    margin:16px 0;
+    color:#d1d1d1;
+}
+
+a{
+    color:#cfcfcf;
+    text-decoration:none;
+    border-bottom:1px solid #555;
+    transition:0.2s ease;
+}
+
+a:hover{
+    color:#ffffff;
+    border-color:#ffffff;
+}
+
+/* =========================
+   CODE
+========================= */
+
+pre{
+    background:#111111 !important;
+    border:1px solid #232323;
+    border-radius:14px;
+    padding:22px !important;
+    overflow-x:auto;
+    margin:28px 0;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 10px 25px rgba(0,0,0,0.35);
+}
+
+code{
+    font-family:"JetBrains Mono", monospace;
+    background:#1a1a1a;
+    color:#f5f5f5;
+    padding:3px 7px;
+    border-radius:6px;
+    font-size:0.95rem;
+}
+
+pre code{
+    background:transparent;
+    padding:0;
+}
+
+/* =========================
+   IMAGES
+========================= */
+
+figure{
+    margin:35px 0;
+}
+
+figure img{
+    width:100%;
+    border-radius:16px;
+    border:1px solid #232323;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.03);
+    transition:0.25s ease;
+}
+
+figure img:hover{
+    transform:scale(1.01);
+}
+
+/* =========================
+   LISTS
+========================= */
+
+ul,ol{
+    padding-left:24px;
+    margin:18px 0;
+}
+
+li{
+    margin-bottom:10px;
+}
+
+/* =========================
+   BLOCKQUOTE
+========================= */
+
+blockquote{
+    background:#111111;
+    border-left:4px solid #555;
+    padding:20px;
+    margin:28px 0;
+    border-radius:12px;
+    color:#d1d1d1;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:30px 0;
+}
+
+th{
+    background:#141414;
+    color:#ffffff;
+}
+
+td,th{
+    border:1px solid #2a2a2a;
+    padding:14px;
+}
+
+td{
+    background:#0f0f0f;
+}
+
+/* =========================
+   HR
+========================= */
+
+hr{
+    border:none;
+    height:1px;
+    background:#1f1f1f;
+    margin:50px 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+    body{
+        padding:24px 18px;
+    }
+    .page-title{
+        font-size:2.2rem;
+    }
+    h2{
+        font-size:1.5rem;
+    }
+    pre{
+        padding:18px !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<article class="page sans">
+
+<header>
+    <h1 class="page-title">Jira Service Management (JSM) – Practical Infrastructure Management</h1>
+</header>
+
+<div class="page-body">
+
+<figure>
+    <img src="image.png" alt="JSM Screenshot">
+</figure>
+
+<p>Click the blue <strong>Create</strong> button at the top of the screen and set the <strong>Issue Type</strong> to <code>Incident</code>.</p>
+
+<p>For the sake of this example, we’ll use the scenario:</p>
+
+<p><strong>Summary:</strong> <em>"User reports clicking a suspicious link and password no longer working."</em></p>
+
+<p><strong>Description:</strong> <em>"User received an email looking like an internal HR memo. Input credentials. System now showing multiple failed login attempts on endpoint PC-04."</em></p>
+
+<p>Set the <strong>Priority</strong> to <code>High</code> or <code>Highest</code>. Click <strong>Create</strong>.</p>
+
+<figure>
+    <img src="image 1.png" alt="JSM Create Incident">
+</figure>
+
+<h3><strong>Agent Workflow</strong></h3>
+
+<p>On your left navigation sidebar, click <strong>Queues</strong>. Open the <strong>All Open</strong> queue, click on your new incident ticket and assign it to yourself.</p>
+
+<figure>
+    <img src="image 2.png" alt="JSM Queue">
+</figure>
+
+<p>We can now move the status from <strong>To Do</strong> (or Open) to <strong>In Progress</strong> because we would be working to resolve this issue.</p>
+
+<p>We can also add an <strong>Internal Comment</strong> (hidden from the end-user) documenting your security steps. For example:</p>
+
+<p><em>"Isolating user's endpoint from the network via firewall rules. Initiating an Active Directory password reset and terminating all active sessions to minimize risk."</em></p>
+
+<figure>
+    <img src="image 3.png" alt="JSM Internal Comment">
+</figure>
+
+<p>Lastly, move the ticket to <strong>Resolved</strong>.</p>
+
+<figure>
+    <img src="image 4.png" alt="JSM Resolved">
+</figure>
+
+</div>
+</article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+</body>
+</html>
