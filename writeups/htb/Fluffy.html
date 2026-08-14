@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTB Fluffy Writeup</title>
 </head>
 <body>
@@ -41,7 +42,8 @@
     <h2>Vulnerabilities Research</h2>
     <p>I looked up the CVE's and the one the showed the most promise for grant me a foothold was the second critical vulnerability <strong>CVE-2025-24071.</strong></p>
     <p>PoC check:</p>
-    <p>I clicked on the third link which led me to this blog that explained the exploitation process: https://cti.monster.</p>
+    <p>I clicked on the third link which led me to this blog that explained the exploitation process: https://cti.monster/blog/2025/03/18/CVE-2025-24071.html
+        .</p>
     <p>Copied the exploit code, generated the malicious zip file.</p>
     <p>Before we upload the malicious zip file to the host via adding it to the SMB file share, lets start Responder to capture the hash(es).</p>
 
